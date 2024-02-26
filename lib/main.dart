@@ -4,24 +4,38 @@ import 'package:habitpunk/pages/addhabit_page.dart';
 import 'package:habitpunk/pages/fight_page.dart';
 import 'package:habitpunk/pages/reward_page.dart';
 import 'package:habitpunk/pages/daily_page.dart';
+import 'package:habitpunk/pages/login_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-void main() {
-  runApp(const MyApp());
+
+void main() async {
+  WidgetsFlutterBinding
+      .ensureInitialized(); // Ensure Flutter bindings are initialized
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions
+        .currentPlatform, // Use platform-specific Firebase options
+  );
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
 
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: NavigationScreen(
-        currentIndex: 3,
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.active) {
+            if (snapshot.hasData) {
+              return NavigationScreen(currentIndex: 0); // User is logged in
+            }
+            return LoginScreen(); // User is not logged in
+          }
+          return Scaffold(body: Center(child: CircularProgressIndicator())); // Loading state
+        },
       ),
     );
   }
@@ -66,7 +80,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
               icon: Icon(Icons.calendar_today), label: "Dailies"),
           BottomNavigationBarItem(icon: Icon(Icons.add_box), label: "Add"),
           BottomNavigationBarItem(icon: Icon(Icons.ac_unit), label: "Rewards"),
-          BottomNavigationBarItem(icon: Icon(Icons.pan_tool_outlined), label: "Fight")
+          BottomNavigationBarItem(
+              icon: Icon(Icons.pan_tool_outlined), label: "Fight")
         ],
       ),
     );
