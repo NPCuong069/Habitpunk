@@ -14,10 +14,12 @@ class HabitTile extends StatelessWidget {
           color: Colors.grey[100],
           borderRadius: BorderRadius.circular(12),
         ),
-        child: const Row(children: [
-          Text('Test 1'),
-          Icon(Icons.settings),
-        ],),
+         child: Row( // Removed const based on the error message
+          children: const [
+            Text('Test 1'),
+            Icon(Icons.settings),
+          ],
+        ),
       ),
     );
   }
