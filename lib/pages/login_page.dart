@@ -1,6 +1,7 @@
 // login_screen.dart
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:habitpunk/pages/sign_up_page.dart';
 
 class LoginScreen extends StatelessWidget {
   final _auth = FirebaseAuth.instance;
@@ -39,12 +40,22 @@ class LoginScreen extends StatelessWidget {
                 // If successful, the StreamBuilder in NavigationScreen will handle navigation
               } catch (e) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("Failed to sign in with Email & Password")),
+                  SnackBar(
+                      content: Text("Failed to sign in with Email & Password")),
                 );
               }
             },
             child: Text("Login"),
           ),
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SignUpPage()),
+              );
+            },
+            child: Text('Don\'t have an account? Sign up'),
+          )
         ],
       ),
     );
