@@ -9,6 +9,8 @@ import 'package:habitpunk/pages/daily_page.dart';
 import 'login_page.dart';
 
 class NavigationScreen extends StatelessWidget {
+  const NavigationScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
@@ -17,20 +19,22 @@ class NavigationScreen extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {
             // User is signed in
-            return MainContent();
+            return const MainContent();
           } else {
             // User is not signed in, show login screen
             return LoginScreen();
           }
         }
         // Waiting for authentication state to be available
-        return Scaffold(body: Center(child: CircularProgressIndicator()));
+        return const Scaffold(body: Center(child: CircularProgressIndicator()));
       },
     );
   }
 }
 
 class MainContent extends StatefulWidget {
+  const MainContent({super.key});
+
   @override
   _MainContentState createState() => _MainContentState();
 }
@@ -39,11 +43,11 @@ class _MainContentState extends State<MainContent> {
   int currentIndex = 0;
 
   final screens = [
-    HomePage(),
-    DailyPage(),
-    AddHabitPage(),
-    RewardPage(),
-    FightPage(),
+    const HomePage(),
+    const DailyPage(),
+    const AddHabitPage(),
+    const RewardPage(),
+    const FightPage(),
   ];
 
   @override

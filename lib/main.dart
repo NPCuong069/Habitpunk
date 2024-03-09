@@ -8,6 +8,7 @@ import 'package:habitpunk/pages/login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:habitpunk/pages/home_page.dart' show HomePageWidget;
 
 
 void main() async {
@@ -17,11 +18,13 @@ void main() async {
     options: DefaultFirebaseOptions
         .currentPlatform, // Use platform-specific Firebase options
   );
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -34,15 +37,18 @@ class MyApp extends StatelessWidget {
             }
             return LoginScreen(); // User is not logged in
           }
-          return Scaffold(body: Center(child: CircularProgressIndicator())); // Loading state
+          return const Scaffold(body: Center(child: CircularProgressIndicator())); // Loading state
         },
       ),
     );
   }
 }
 
+
+
+
 class NavigationScreen extends StatefulWidget {
-  NavigationScreen({required this.currentIndex});
+  NavigationScreen({super.key, required this.currentIndex});
   int currentIndex;
   @override
   State<NavigationScreen> createState() => _NavigationScreenState();

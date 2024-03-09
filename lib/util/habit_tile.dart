@@ -8,14 +8,14 @@ class HabitTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
 
         decoration: BoxDecoration(
           color: Colors.grey[100],
           borderRadius: BorderRadius.circular(12),
         ),
-         child: Row( // Removed const based on the error message
-          children: const [
+         child: const Row( // Removed const based on the error message
+          children: [
             Text('Test 1'),
             Icon(Icons.settings),
           ],

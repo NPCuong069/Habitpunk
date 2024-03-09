@@ -8,10 +8,12 @@ class LoginScreen extends StatelessWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
+  LoginScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Login")),
+      appBar: AppBar(title: const Text("Login")),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -19,14 +21,14 @@ class LoginScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               controller: emailController,
-              decoration: InputDecoration(labelText: "Email"),
+              decoration: const InputDecoration(labelText: "Email"),
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               controller: passwordController,
-              decoration: InputDecoration(labelText: "Password"),
+              decoration: const InputDecoration(labelText: "Password"),
               obscureText: true,
             ),
           ),
@@ -40,12 +42,12 @@ class LoginScreen extends StatelessWidget {
                 // If successful, the StreamBuilder in NavigationScreen will handle navigation
               } catch (e) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
+                  const SnackBar(
                       content: Text("Failed to sign in with Email & Password")),
                 );
               }
             },
-            child: Text("Login"),
+            child: const Text("Login"),
           ),
           TextButton(
             onPressed: () {
@@ -54,7 +56,7 @@ class LoginScreen extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => SignUpPage()),
               );
             },
-            child: Text('Don\'t have an account? Sign up'),
+            child: const Text('Don\'t have an account? Sign up'),
           )
         ],
       ),

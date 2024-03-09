@@ -7,46 +7,48 @@ class SignUpPage extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
 
+  SignUpPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign Up'),
+        title: const Text('Sign Up'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
               controller: emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Email',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             TextField(
               controller: passwordController,
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Password',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             TextField(
               controller: confirmPasswordController,
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Confirm Password',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () => _signUp(context),
-              child: Text('Sign Up'),
+              child: const Text('Sign Up'),
             ),
           ],
         ),
@@ -70,7 +72,7 @@ class SignUpPage extends StatelessWidget {
       }
     } else {
       // Handle password mismatch
-      final snackBar = SnackBar(content: Text("Passwords do not match"));
+      const snackBar = SnackBar(content: Text("Passwords do not match"));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
